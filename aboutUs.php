@@ -60,6 +60,16 @@ require_once 'includes/header.php';
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
+
+        @media (max-width: 768px) {
+            .about-section {
+                flex-direction: column;
+                padding: 40px 20px;
+            }
+            .about-text, .about-image {
+                max-width: 90%;
+            }
+        }
     </style>
 
 </head>
