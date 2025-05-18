@@ -31,3 +31,15 @@ $stmt = $conn->prepare($topics_sql);
 $stmt->execute([$category_id]);
 $topics_result = $stmt;
 ?>
+<div class="mb-4">
+    <h2><?php echo htmlspecialchars($category['name']); ?></h2>
+    <p class="text-muted"><?php echo htmlspecialchars($category['description']); ?></p>
+</div>
+
+<?php if ($logged_in): ?>
+    <div class="mb-4">
+        <a href="create_topic.php?category_id=<?php echo $category_id; ?>" class="btn btn-primary">
+            Create New Topic
+        </a>
+    </div>
+<?php endif; ?>
