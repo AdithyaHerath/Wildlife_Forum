@@ -18,4 +18,16 @@ if (!$category) {
     header("location: index.php");
     exit();
 }
+
+// Get all topics in this category
+$topics_sql = "SELECT t.*, u.username, 
+              (SELECT COUNT(*) FROM replies WHERE topic_id = t.topic_id) as reply_count 
+              FROM topics t 
+              JOIN users u ON t.user_id = u.user_id 
+              WHERE t.category_id = ? 
+              ORDER BY t.created_at DESC";
+
+$stmt = $conn->prepare($topics_sql);
+$stmt->execute([$category_id]);
+$topics_result = $stmt;
 ?>
