@@ -33,4 +33,14 @@ if (!$is_admin && $_SESSION['user_id'] != $topic['user_id']) {
 }
 
 
+// Delete topic (replies will be deleted automatically due to CASCADE)
+$delete_sql = "DELETE FROM topics WHERE topic_id = ?";
+$stmt = $conn->prepare($delete_sql);
+
+if ($stmt->execute([$topic_id])) {
+    header("location: category.php?id=" . $topic['category_id']);
+    exit();
+} else {
+    echo "Error deleting topic.";
+}
 ?>
