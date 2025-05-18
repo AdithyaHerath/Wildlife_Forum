@@ -44,3 +44,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 class="mb-4">Create New Topic</h2>
+        
+        <?php if (!empty($error)): ?>
+            <div class="alert alert-danger"><?php echo $error; ?></div>
+        <?php endif; ?>
+        
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="mb-3">
+                <label for="category_id" class="form-label">Category</label>
+                <select class="form-select" id="category_id" name="category_id" required>
+                    <option value="">Select a category</option>
+                    <?php while ($category = $categories_result->fetch()): ?>
+                        <option value="<?php echo $category['category_id']; ?>" 
+                                <?php echo ($category_id == $category['category_id']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($category['name']); ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea class="form-control" id="content" name="content" rows="6" required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Create Topic</button>
+            <a href="index.php" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+
+<?php require_once 'includes/footer.php'; ?>
