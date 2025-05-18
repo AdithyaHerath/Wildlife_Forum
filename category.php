@@ -43,3 +43,40 @@ $topics_result = $stmt;
         </a>
     </div>
 <?php endif; ?>
+
+<?php if ($topics_result->rowCount() > 0): ?>
+    <?php while ($topic = $topics_result->fetch()): ?>
+        <div class="topic-container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3>
+                    <a href="topic.php?id=<?php echo $topic['topic_id']; ?>">
+                        <?php echo htmlspecialchars($topic['title']); ?>
+                    </a>
+                </h3>
+                <?php if ($logged_in && ($is_admin || $_SESSION['user_id'] == $topic['user_id'])): ?>
+                    <div class="action-buttons">
+                        <a href="edit_topic.php?id=<?php echo $topic['topic_id']; ?>" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a href="delete_topic.php?id=<?php echo $topic['topic_id']; ?>" 
+                           class="btn btn-sm btn-outline-danger"
+                           onclick="return confirm('Are you sure you want to delete this topic?')">Delete</a>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <div class="metadata">
+                Posted by <?php echo htmlspecialchars($topic['username']); ?> | 
+                <?php echo date('M j, Y', strtotime($topic['created_at'])); ?> | 
+                <?php echo $topic['reply_count']; ?> replies
+            </div>
+            <div class="mt-2">
+                <?php echo nl2br(htmlspecialchars(substr($topic['content'], 0, 200))); ?>
+                <?php if (strlen($topic['content']) > 200): ?>
+                    ... <a href="topic.php?id=<?php echo $topic['topic_id']; ?>">Read more</a>
+                <?php endif; ?>
+            </div>
+        </div>
+    <?php endwhile; ?>
+<?php else: ?>
+    <p>No topics in this category yet.</p>
+<?php endif; ?>
+
+<?php require_once 'includes/footer.php'; ?>
