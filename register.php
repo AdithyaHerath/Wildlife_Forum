@@ -53,4 +53,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2 class="mb-4">Register</h2>
+        <?php if (!empty($error)) { ?>
+            <div class="alert alert-danger"><?php echo $error; ?></div>
+        <?php } ?>
+        <?php if (!empty($success)) { ?>
+            <div class="alert alert-success"><?php echo $success; ?></div>
+        <?php } ?>
+    </div>
+</div>
+
 <?php require_once 'includes/footer.php'; ?>
