@@ -39,6 +39,7 @@ require_once 'includes/header.php';
         .about-text:hover {
             transform: scale(1.02);
         }
+
         .about-text h1 {
             font-size: 2.8rem;
             color: #2575fc;
