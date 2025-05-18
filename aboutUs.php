@@ -71,10 +71,23 @@ require_once 'includes/header.php';
             }
         }
     </style>
-
 </head>
 <body>
     
+    <section class="about-section">
+        <div class="about-text">
+            <h1>Our Story</h1>
+            <p>
+                We are a group of university students united by our passion for nature and technology. Our mission is to create a vibrant, engaging, and informative platform for wildlife enthusiasts, researchers, and conservationists to connect and share ideas. <br><br>
+                This nature-based forum is more than just a discussion board — it's a digital sanctuary where curiosity meets conservation. Whether you're here to share breathtaking wildlife encounters, publish research, or organize eco-events, you're part of a growing movement to protect what we love. <br><br>
+                Together, we aim to build a community that reflects the beauty, diversity, and urgency of the natural world.
+            </p>
+        </div>
+        <div class="about-image">
+            <img src="images/aboutUS.jpg" alt="Nature landscape">
+        </div>
+    </section>
+
 </body>
 </html>
 
