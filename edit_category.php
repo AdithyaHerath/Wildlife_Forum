@@ -25,4 +25,27 @@ if (!$category) {
     header("location: admin.php");
     exit();
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = trim($_POST['name']);
+    $description = trim($_POST['description']);
+    
+    if (empty($name)) {
+        $error = "Category name is required.";
+    } else {
+        // Update category
+        $update_sql = "UPDATE categories SET name = ?, description = ? WHERE category_id = ?";
+        $stmt = $conn->prepare($update_sql);
+        
+        if ($stmt->execute([$name, $description, $category_id])) {
+            $success = "Category updated successfully.";
+            // Refresh category data
+            $stmt = $conn->prepare($category_sql);
+            $stmt->execute([$category_id]);
+            $category = $stmt->fetch();
+        } else {
+            $error = "Something went wrong. Please try again later.";
+        }
+    }
+}
 ?>
