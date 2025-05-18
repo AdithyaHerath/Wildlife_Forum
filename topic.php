@@ -144,3 +144,5 @@ $replies_result = $stmt;
         <p>Please <a href="login.php">login</a> to post a reply.</p>
     </div>
 <?php endif; ?>
+
+<?php require_once 'includes/footer.php'; ?>
