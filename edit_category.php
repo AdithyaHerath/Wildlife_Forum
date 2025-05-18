@@ -54,3 +54,48 @@ $stmt = $conn->prepare($topics_sql);
 $stmt->execute([$category_id]);
 $topic_count = $stmt->fetch()['count'];
 ?>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 class="mb-4">Edit Category</h2>
+        
+        <?php if (!empty($error)): ?>
+            <div class="alert alert-danger"><?php echo $error; ?></div>
+        <?php endif; ?>
+        
+        <?php if (!empty($success)): ?>
+            <div class="alert alert-success"><?php echo $success; ?></div>
+        <?php endif; ?>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">
+                    This category contains <?php echo $topic_count; ?> topics
+                </h6>
+                
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $category_id); ?>" method="post">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Category Name</label>
+                        <input type="text" class="form-control" id="name" name="name" 
+                               value="<?php echo htmlspecialchars($category['name']); ?>" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"><?php echo htmlspecialchars($category['description']); ?></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Update Category</button>
+                    <a href="admin.php" class="btn btn-secondary">Cancel</a>
+                    <a href="delete_category.php?id=<?php echo $category_id; ?>" 
+                       class="btn btn-danger float-end"
+                       onclick="return confirm('Are you sure? This will delete all topics in this category!')">
+                        Delete Category
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php require_once 'includes/footer.php'; ?>
