@@ -48,4 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+// Get topic count
+$topics_sql = "SELECT COUNT(*) as count FROM topics WHERE category_id = ?";
+$stmt = $conn->prepare($topics_sql);
+$stmt->execute([$category_id]);
+$topic_count = $stmt->fetch()['count'];
 ?>
