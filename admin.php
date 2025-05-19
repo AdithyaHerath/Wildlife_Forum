@@ -52,5 +52,15 @@ $stats['users'] = $pdo->query("SELECT COUNT(*) as count FROM users")->fetchColum
 $stats['topics'] = $pdo->query("SELECT COUNT(*) as count FROM topics")->fetchColumn();
 $stats['replies'] = $pdo->query("SELECT COUNT(*) as count FROM replies")->fetchColumn();
 
+// Get categories
+$categories_sql = "
+    SELECT c.*, 
+           (SELECT COUNT(*) FROM topics WHERE category_id = c.category_id) as topic_count 
+    FROM categories c 
+    ORDER BY c.name
+";
+$categories_stmt = $pdo->query($categories_sql);
+$categories = $categories_stmt->fetchAll();
+
 ?>
 <?php include("includes/footer.php"); ?>
