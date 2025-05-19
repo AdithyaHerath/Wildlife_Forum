@@ -17,7 +17,7 @@ $topic_sql = "SELECT t.*, c.name as category_name, c.category_id, u.username
               JOIN users u ON t.user_id = u.user_id 
               WHERE t.topic_id = ?";
 
-$stmt = $conn->prepare($topic_sql);
+$stmt = $pdo->prepare($topic_sql);
 $stmt->execute([$topic_id]);
 $topic = $stmt->fetch();
 
@@ -34,14 +34,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $logged_in) {
         $error = "Reply content cannot be empty.";
     } else {
         $sql = "INSERT INTO replies (topic_id, user_id, content) VALUES (?, ?, ?)";
-        $stmt = $conn->prepare($sql);
+        $stmt = $pdo->prepare($sql);
         
-        if ($stmt->execute([$topic_id, $_SESSION['user_id'], $reply_content])) {
+        try {
+            $stmt->execute([$topic_id, $_SESSION['user_id'], $reply_content]);
             $success = "Reply posted successfully.";
             // Clear the form
             $_POST['content'] = '';
-        } else {
+        } catch (\PDOException $e) {
             $error = "Something went wrong. Please try again later.";
+            // Log the error
+            error_log("Error posting reply: " . $e->getMessage());
         }
     }
 }
@@ -53,10 +56,9 @@ $replies_sql = "SELECT r.*, u.username
                 WHERE r.topic_id = ? 
                 ORDER BY r.created_at ASC";
 
-$stmt = $conn->prepare($replies_sql);
+$stmt = $pdo->prepare($replies_sql);
 $stmt->execute([$topic_id]);
-$replies_result = $stmt;
-
+$replies = $stmt->fetchAll();
 ?>
 
 <div class="mb-4">
@@ -98,7 +100,7 @@ $replies_result = $stmt;
 
 <h3 class="mb-4">Replies</h3>
 
-<?php while ($reply = mysqli_fetch_assoc($replies_result)): ?>
+<?php foreach ($replies as $reply): ?>
     <div class="reply-container">
         <div class="d-flex justify-content-between align-items-center">
             <div class="metadata">
@@ -118,7 +120,7 @@ $replies_result = $stmt;
             <?php echo nl2br(htmlspecialchars($reply['content'])); ?>
         </div>
     </div>
-<?php endwhile; ?>
+<?php endforeach; ?>
 
 <?php if ($logged_in): ?>
     <div class="mt-4">
