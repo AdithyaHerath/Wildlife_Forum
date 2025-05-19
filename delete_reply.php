@@ -32,4 +32,18 @@ if (!$is_admin && $_SESSION['user_id'] != $reply['user_id']) {
     exit();
 }
 
+// Delete reply
+$delete_sql = "DELETE FROM replies WHERE reply_id = ?";
+$stmt = $pdo->prepare($delete_sql);
+
+try {
+    $stmt->execute([$reply_id]);
+    header("location: topic.php?id=" . $reply['topic_id']);
+    exit();
+} catch (\PDOException $e) {
+    echo "Error deleting reply.";
+    // Log the error
+    error_log("Error deleting reply: " . $e->getMessage());
+}
+
 ?>
