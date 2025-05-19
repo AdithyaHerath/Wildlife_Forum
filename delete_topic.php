@@ -17,7 +17,7 @@ $topic_id = $_GET['id'];
 $topic_sql = "SELECT t.*, c.category_id FROM topics t 
               JOIN categories c ON t.category_id = c.category_id 
               WHERE t.topic_id = ?";
-$stmt = $conn->prepare($topic_sql);
+$stmt = $pdo->prepare($topic_sql);
 $stmt->execute([$topic_id]);
 $topic = $stmt->fetch();
 
@@ -32,15 +32,17 @@ if (!$is_admin && $_SESSION['user_id'] != $topic['user_id']) {
     exit();
 }
 
-
 // Delete topic (replies will be deleted automatically due to CASCADE)
 $delete_sql = "DELETE FROM topics WHERE topic_id = ?";
-$stmt = $conn->prepare($delete_sql);
+$stmt = $pdo->prepare($delete_sql);
 
-if ($stmt->execute([$topic_id])) {
+try {
+    $stmt->execute([$topic_id]);
     header("location: category.php?id=" . $topic['category_id']);
     exit();
-} else {
+} catch (\PDOException $e) {
     echo "Error deleting topic.";
+    // Log the error
+    error_log("Error deleting topic: " . $e->getMessage());
 }
 ?>
