@@ -12,7 +12,8 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
 
 // Get categories for dropdown
 $categories_sql = "SELECT * FROM categories ORDER BY name";
-$categories_result = $conn->query($categories_sql);
+$categories_stmt = $pdo->query($categories_sql);
+$categories = $categories_stmt->fetchAll();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = trim($_POST['title']);
@@ -23,22 +24,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Please fill in all fields.";
     } else {
         // Verify category exists
-        $category_check = $conn->prepare("SELECT category_id FROM categories WHERE category_id = ?");
-        $category_check->execute([$category_id]);
+        $category_check_sql = "SELECT category_id FROM categories WHERE category_id = ?";
+        $category_check_stmt = $pdo->prepare($category_check_sql);
+        $category_check_stmt->execute([$category_id]);
         
-        if ($category_check->rowCount() == 0) {
+        if ($category_check_stmt->rowCount() == 0) {
             $error = "Invalid category selected.";
         } else {
             // Create new topic
             $sql = "INSERT INTO topics (category_id, user_id, title, content) VALUES (?, ?, ?, ?)";
-            $stmt = $conn->prepare($sql);
+            $stmt = $pdo->prepare($sql);
             
-            if ($stmt->execute([$category_id, $_SESSION['user_id'], $title, $content])) {
-                $topic_id = $conn->lastInsertId();
+            try {
+                $stmt->execute([$category_id, $_SESSION['user_id'], $title, $content]);
+                $topic_id = $pdo->lastInsertId();
                 header("location: topic.php?id=" . $topic_id);
                 exit();
-            } else {
+            } catch (\PDOException $e) {
                 $error = "Something went wrong. Please try again later.";
+                // Log the error
+                error_log("Error creating topic: " . $e->getMessage());
             }
         }
     }
@@ -58,12 +63,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="category_id" class="form-label">Category</label>
                 <select class="form-select" id="category_id" name="category_id" required>
                     <option value="">Select a category</option>
-                    <?php while ($category = $categories_result->fetch()): ?>
+                    <?php foreach ($categories as $category): ?>
                         <option value="<?php echo $category['category_id']; ?>" 
                                 <?php echo ($category_id == $category['category_id']) ? 'selected' : ''; ?>>
                             <?php echo htmlspecialchars($category['name']); ?>
                         </option>
-                    <?php endwhile; ?>
+                    <?php endforeach; ?>
                 </select>
             </div>
             
