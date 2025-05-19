@@ -70,6 +70,12 @@ $categories = $categories_stmt->fetchAll();
 
 <h2 class="mb-4">Forum Categories</h2>
 
+<?php if (!$logged_in): ?>
+    <div class="alert alert-warning">
+        You must be logged in to create or reply to topics in the forum.
+    </div>
+<?php endif; ?>
+
 <?php if ($logged_in): ?>
     <div class="mb-4">
         <a href="create_topic.php" class="btn btn-primary">Create New Topic</a>
