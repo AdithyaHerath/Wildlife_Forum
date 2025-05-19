@@ -122,6 +122,9 @@ $categories = $categories_stmt->fetchAll();
             <p class="text-muted">No topics yet</p>
         <?php endif; ?>
 
+        <a href="category.php?id=<?php echo $category['category_id']; ?>" class="btn btn-sm btn-outline-primary">
+            View All Topics
+        </a>
     </div>
 <?php endforeach; ?>
 
