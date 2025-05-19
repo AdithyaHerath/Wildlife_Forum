@@ -159,6 +159,45 @@ $events = $events_stmt->fetchAll();
                 </div>
             </div>
         </div>
-        
+
+        <!-- Events Table -->
+        <div class="card mb-4">
+            <div class="card-header"><h3 class="card-title h5 mb-0">Scheduled Events</h3></div>
+            <div class="card-body">
+                <?php if (count($events) > 0): ?>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Date</th>
+                                    <th>Created By</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($events as $event): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($event['title']); ?></td>
+                                        <td><?php echo htmlspecialchars($event['event_date']); ?></td>
+                                        <td><?php echo htmlspecialchars($event['username']); ?></td>
+                                        <td>
+                                            <a href="admin.php?delete_event=<?php echo $event['event_id']; ?>" 
+                                               class="btn btn-sm btn-danger"
+                                               onclick="return confirm('Are you sure you want to delete this event?');">
+                                                Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php else: ?>
+                    <p>No events scheduled yet.</p>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
 </div>
 <?php include("includes/footer.php"); ?>
