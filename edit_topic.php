@@ -38,4 +38,28 @@ if (!$is_admin && $_SESSION['user_id'] != $topic['user_id']) {
 // Get categories for dropdown
 $categories_sql = "SELECT * FROM categories ORDER BY name";
 $categories_result = $conn->query($categories_sql);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $title = trim($_POST['title']);
+    $content = trim($_POST['content']);
+    $category_id = $_POST['category_id'];
+    
+    if (empty($title) || empty($content) || empty($category_id)) {
+        $error = "Please fill in all fields.";
+    } else {
+        // Update topic
+        $update_sql = "UPDATE topics SET title = ?, content = ?, category_id = ? WHERE topic_id = ?";
+        $stmt = $conn->prepare($update_sql);
+        
+        if ($stmt->execute([$title, $content, $category_id, $topic_id])) {
+            $success = "Topic updated successfully.";
+            // Refresh topic data
+            $stmt = $conn->prepare($topic_sql);
+            $stmt->execute([$topic_id]);
+            $topic = $stmt->fetch();
+        } else {
+            $error = "Something went wrong. Please try again later.";
+        }
+    }
+}
 ?>
