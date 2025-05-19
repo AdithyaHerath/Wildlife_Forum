@@ -100,6 +100,25 @@ $categories = $categories_stmt->fetchAll();
         $topics = $topics_stmt->fetchAll();
         ?>
 
+        <?php if (count($topics) > 0): ?>
+            <div class="latest-topics">
+                <h5>Latest Topics:</h5>
+                <ul class="list-unstyled">
+                    <?php foreach ($topics as $topic): ?>
+                        <li>
+                            <a href="topic.php?id=<?php echo $topic['topic_id']; ?>">
+                                <?php echo htmlspecialchars($topic['title']); ?>
+                            </a>
+                            <span class="metadata">
+                                by <?php echo htmlspecialchars($topic['username']); ?> | 
+                                <?php echo date('M j, Y', strtotime($topic['created_at'])); ?> | 
+                                <?php echo $topic['reply_count']; ?> replies
+                            </span>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            
     </div>
 <?php endforeach; ?>
 
