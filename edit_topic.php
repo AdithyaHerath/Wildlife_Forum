@@ -34,4 +34,8 @@ if (!$is_admin && $_SESSION['user_id'] != $topic['user_id']) {
     header("location: topic.php?id=" . $topic_id);
     exit();
 }
+
+// Get categories for dropdown
+$categories_sql = "SELECT * FROM categories ORDER BY name";
+$categories_result = $conn->query($categories_sql);
 ?>
