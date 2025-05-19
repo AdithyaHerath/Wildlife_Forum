@@ -128,4 +128,39 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
+<!-- Resources Section -->
+<div class="container mb-5">
+    <h2 class="display-6 fw-bold text-center mb-4">Research Resources</h2>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title fw-bold">Academic Journals</h4>
+                    <div class="list-group list-group-flush">
+                        <a href="https://www.sciencedirect.com/" target="_blank" class="list-group-item list-group-item-action">ScienceDirect</a>
+                        <a href="https://www.jstor.org/" target="_blank" class="list-group-item list-group-item-action">JSTOR</a>
+                        <a href="https://www.nature.com/" target="_blank" class="list-group-item list-group-item-action">Nature</a>
+                        <a href="https://www.science.org/" target="_blank" class="list-group-item list-group-item-action">Science</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title fw-bold">Research Organizations</h4>
+                    <div class="list-group list-group-flush">
+                        <a href="https://www.iucn.org/" target="_blank" class="list-group-item list-group-item-action">IUCN</a>
+                        <a href="https://www.worldwildlife.org/" target="_blank" class="list-group-item list-group-item-action">WWF</a>
+                        <a href="https://www.conservation.org/" target="_blank" class="list-group-item list-group-item-action">Conservation International</a>
+                        <a href="https://www.wcs.org/" target="_blank" class="list-group-item list-group-item-action">Wildlife Conservation Society</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php require_once 'includes/footer.php'; ?> 
