@@ -29,6 +29,12 @@ if (!$reply) {
     exit();
 }
 
+
+// Check if user has permission to edit
+if (!$is_admin && $_SESSION['user_id'] != $reply['user_id']) {
+    header("location: topic.php?id=" . $reply['topic_id']);
+    exit();
+
 ?>
 
 <?php require_once 'includes/footer.php'; ?>
