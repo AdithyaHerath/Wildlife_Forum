@@ -17,6 +17,8 @@ require_once 'includes/header.php';
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
+        <div class="carousel-inner rounded-3">
+        </div>
  </div>
 
 </div>
