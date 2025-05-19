@@ -136,5 +136,29 @@ $events = $events_stmt->fetchAll();
                 </div>
             </div>
         </div>
+
+        <!-- Recent Topics -->
+        <div class="card mb-4">
+            <div class="card-header"><h3 class="card-title h5 mb-0">Recent Topics</h3></div>
+            <div class="card-body">
+                <div class="list-group">
+                    <?php foreach ($recent_topics as $topic): ?>
+                        <div class="list-group-item">
+                            <h6 class="mb-1">
+                                <a href="topic.php?id=<?php echo $topic['topic_id']; ?>">
+                                    <?php echo htmlspecialchars($topic['title']); ?>
+                                </a>
+                            </h6>
+                            <small class="text-muted">
+                                in <?php echo htmlspecialchars($topic['category_name']); ?> | 
+                                by <?php echo htmlspecialchars($topic['username']); ?> | 
+                                <?php echo date('M j, Y', strtotime($topic['created_at'])); ?>
+                            </small>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+        
 </div>
 <?php include("includes/footer.php"); ?>
