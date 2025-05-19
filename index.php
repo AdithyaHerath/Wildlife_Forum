@@ -68,5 +68,18 @@ $categories_stmt = $pdo->query($categories_sql);
 $categories = $categories_stmt->fetchAll();
 ?>
 
+<h2 class="mb-4">Forum Categories</h2>
+
+<?php foreach ($categories as $category): ?>
+    <div class="category-box">
+        <h3>
+            <a href="category.php?id=<?php echo $category['category_id']; ?>">
+                <?php echo htmlspecialchars($category['name']); ?>
+            </a>
+        </h3>
+        <p><?php echo htmlspecialchars($category['description']); ?></p>
+    </div>
+<?php endforeach; ?>
+
 
 <?php require_once 'includes/footer.php'; ?>
