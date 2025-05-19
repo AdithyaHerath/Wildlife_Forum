@@ -18,6 +18,23 @@ require_once 'includes/header.php';
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner rounded-3">
+
+            <!-- Slide 1: Wildfires -->
+            <div class="carousel-item active">
+                <img src="images/wildfire.jpeg" class="d-block w-100" alt="Wildfire Image">
+            </div>
+
+            <!-- Slide 2: Turtle Conservation -->
+            <div class="carousel-item">
+                <img src="images/turtal_release.jpg" class="d-block w-100" alt="Turtle Release Image">
+            </div>
+
+            <!-- Slide 3: Snow Leopard -->
+            <div class="carousel-item">
+                <img src="images/snow_leopards.jpg" class="d-block w-100" alt="Snow Leopard Image">
+            </div>
+
+            
         </div>
  </div>
 
