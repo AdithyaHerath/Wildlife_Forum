@@ -118,7 +118,10 @@ $categories = $categories_stmt->fetchAll();
                     <?php endforeach; ?>
                 </ul>
             </div>
-            
+        <?php else: ?>
+            <p class="text-muted">No topics yet</p>
+        <?php endif; ?>
+
     </div>
 <?php endforeach; ?>
 
