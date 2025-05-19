@@ -10,7 +10,7 @@ $category_id = $_GET['id'];
 
 // Get category details
 $category_sql = "SELECT * FROM categories WHERE category_id = ?";
-$stmt = $conn->prepare($category_sql);
+$stmt = $pdo->prepare($category_sql);
 $stmt->execute([$category_id]);
 $category = $stmt->fetch();
 
@@ -27,10 +27,11 @@ $topics_sql = "SELECT t.*, u.username,
               WHERE t.category_id = ? 
               ORDER BY t.created_at DESC";
 
-$stmt = $conn->prepare($topics_sql);
+$stmt = $pdo->prepare($topics_sql);
 $stmt->execute([$category_id]);
-$topics_result = $stmt;
+$topics = $stmt->fetchAll();
 ?>
+
 <div class="mb-4">
     <h2><?php echo htmlspecialchars($category['name']); ?></h2>
     <p class="text-muted"><?php echo htmlspecialchars($category['description']); ?></p>
@@ -44,8 +45,8 @@ $topics_result = $stmt;
     </div>
 <?php endif; ?>
 
-<?php if ($topics_result->rowCount() > 0): ?>
-    <?php while ($topic = $topics_result->fetch()): ?>
+<?php if (count($topics) > 0): ?>
+    <?php foreach ($topics as $topic): ?>
         <div class="topic-container">
             <div class="d-flex justify-content-between align-items-center">
                 <h3>
@@ -74,7 +75,7 @@ $topics_result = $stmt;
                 <?php endif; ?>
             </div>
         </div>
-    <?php endwhile; ?>
+    <?php endforeach; ?>
 <?php else: ?>
     <p>No topics in this category yet.</p>
 <?php endif; ?>
