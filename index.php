@@ -46,7 +46,7 @@ require_once 'includes/header.php';
                 </div>
             </div>            
         </div>
-        
+
         <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -58,5 +58,15 @@ require_once 'includes/header.php';
  </div>
 
 </div>
+
+<!-- End Hero Section -->
+
+<?php
+// Get all categories
+$categories_sql = "SELECT * FROM categories ORDER BY name";
+$categories_stmt = $pdo->query($categories_sql);
+$categories = $categories_stmt->fetchAll();
+?>
+
 
 <?php require_once 'includes/footer.php'; ?>
