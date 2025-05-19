@@ -84,6 +84,22 @@ $categories = $categories_stmt->fetchAll();
             </a>
         </h3>
         <p><?php echo htmlspecialchars($category['description']); ?></p>
+
+        <?php
+        // Get latest topics for this category
+        $topics_sql = "SELECT t.*, u.username, 
+                      (SELECT COUNT(*) FROM replies WHERE topic_id = t.topic_id) as reply_count 
+                      FROM topics t 
+                      JOIN users u ON t.user_id = u.user_id 
+                      WHERE t.category_id = ? 
+                      ORDER BY t.created_at DESC 
+                      LIMIT 3";
+
+        $topics_stmt = $pdo->prepare($topics_sql);
+        $topics_stmt->execute([$category['category_id']]);
+        $topics = $topics_stmt->fetchAll();
+        ?>
+
     </div>
 <?php endforeach; ?>
 
