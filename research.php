@@ -79,4 +79,53 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<!-- Research Categories Section -->
+<div class="container mb-5">
+    <h2 class="display-6 fw-bold text-center mb-4">Research Categories</h2>
+    
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title fw-bold">Wildlife Biology</h4>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action">Animal Behavior Studies</a>
+                        <a href="#" class="list-group-item list-group-item-action">Species Population Dynamics</a>
+                        <a href="#" class="list-group-item list-group-item-action">Habitat Ecology</a>
+                        <a href="#" class="list-group-item list-group-item-action">Conservation Genetics</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title fw-bold">Environmental Science</h4>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action">Climate Change Research</a>
+                        <a href="#" class="list-group-item list-group-item-action">Ecosystem Services</a>
+                        <a href="#" class="list-group-item list-group-item-action">Pollution Studies</a>
+                        <a href="#" class="list-group-item list-group-item-action">Sustainable Development</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title fw-bold">Conservation Methods</h4>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action">Protected Area Management</a>
+                        <a href="#" class="list-group-item list-group-item-action">Species Recovery Programs</a>
+                        <a href="#" class="list-group-item list-group-item-action">Community Conservation</a>
+                        <a href="#" class="list-group-item list-group-item-action">Policy and Legislation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php require_once 'includes/footer.php'; ?> 
