@@ -74,5 +74,16 @@ $recent_topics_sql = "
 $recent_topics_stmt = $pdo->query($recent_topics_sql);
 $recent_topics = $recent_topics_stmt->fetchAll();
 
+// Get all events with creator info
+$events_sql = "
+    SELECT e.event_id, e.title, e.description, e.event_date, u.username 
+    FROM events e 
+    JOIN users u ON e.user_id = u.user_id 
+    ORDER BY e.event_date ASC
+";
+$events_stmt = $pdo->query($events_sql);
+$events = $events_stmt->fetchAll();
+?>
+
 ?>
 <?php include("includes/footer.php"); ?>
