@@ -80,4 +80,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="alert alert-success"><?php echo $success; ?></div>
         <?php endif; ?>
 
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $reply_id); ?>" method="post">
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea class="form-control" id="content" name="content" rows="6" required><?php echo htmlspecialchars($reply['content']); ?></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Update Reply</button>
+            <a href="topic.php?id=<?php echo $reply['topic_id']; ?>" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+
 <?php require_once 'includes/footer.php'; ?>
