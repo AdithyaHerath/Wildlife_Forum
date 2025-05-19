@@ -114,4 +114,27 @@ $events = $events_stmt->fetchAll();
     </div>
 </div>
 
+<div class="row">
+
+    <div class="card mb-4">
+        <!-- Categories -->
+        <div class="card-header"><h3 class="card-title h5 mb-0">Categories</h3></div>
+            <div class="card-body">
+                <div class="list-group">
+                    <?php foreach ($categories as $category): ?>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-0"><?php echo htmlspecialchars($category['name']); ?></h6>
+                                <small class="text-muted"><?php echo $category['topic_count']; ?> topics</small>
+                            </div>
+                            <div>
+                                <a href="edit_category.php?id=<?php echo $category['category_id']; ?>" class="btn btn-sm btn-outline-primary">Edit</a>
+                                <a href="delete_category.php?id=<?php echo $category['category_id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+</div>
 <?php include("includes/footer.php"); ?>
