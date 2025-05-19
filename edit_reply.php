@@ -63,4 +63,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 class="mb-4">Edit Reply</h2>
+        <p class="text-muted">
+            Replying to: <a href="topic.php?id=<?php echo $reply['topic_id']; ?>">
+                <?php echo htmlspecialchars($reply['topic_title']); ?>
+            </a>
+        </p>
+        
+        <?php if (!empty($error)): ?>
+            <div class="alert alert-danger"><?php echo $error; ?></div>
+        <?php endif; ?>
+        
+        <?php if (!empty($success)): ?>
+            <div class="alert alert-success"><?php echo $success; ?></div>
+        <?php endif; ?>
+
 <?php require_once 'includes/footer.php'; ?>
