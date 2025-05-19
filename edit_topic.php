@@ -20,7 +20,7 @@ $topic_sql = "SELECT t.*, c.category_id, c.name as category_name
               FROM topics t 
               JOIN categories c ON t.category_id = c.category_id 
               WHERE t.topic_id = ?";
-$stmt = $conn->prepare($topic_sql);
+$stmt = $pdo->prepare($topic_sql);
 $stmt->execute([$topic_id]);
 $topic = $stmt->fetch();
 
@@ -37,7 +37,8 @@ if (!$is_admin && $_SESSION['user_id'] != $topic['user_id']) {
 
 // Get categories for dropdown
 $categories_sql = "SELECT * FROM categories ORDER BY name";
-$categories_result = $conn->query($categories_sql);
+$categories_stmt = $pdo->query($categories_sql);
+$categories = $categories_stmt->fetchAll();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = trim($_POST['title']);
@@ -49,20 +50,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Update topic
         $update_sql = "UPDATE topics SET title = ?, content = ?, category_id = ? WHERE topic_id = ?";
-        $stmt = $conn->prepare($update_sql);
+        $stmt = $pdo->prepare($update_sql);
         
-        if ($stmt->execute([$title, $content, $category_id, $topic_id])) {
+        try {
+            $stmt->execute([$title, $content, $category_id, $topic_id]);
             $success = "Topic updated successfully.";
             // Refresh topic data
-            $stmt = $conn->prepare($topic_sql);
+            $stmt = $pdo->prepare($topic_sql);
             $stmt->execute([$topic_id]);
             $topic = $stmt->fetch();
-        } else {
+        } catch (\PDOException $e) {
             $error = "Something went wrong. Please try again later.";
+            // Log the error
+            error_log("Error updating topic: " . $e->getMessage());
         }
     }
 }
-
 ?>
 
 <div class="row justify-content-center">
@@ -81,12 +84,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="mb-3">
                 <label for="category_id" class="form-label">Category</label>
                 <select class="form-select" id="category_id" name="category_id" required>
-                    <?php while ($category = mysqli_fetch_assoc($categories_result)): ?>
+                    <?php foreach ($categories as $category): ?>
                         <option value="<?php echo $category['category_id']; ?>" 
                                 <?php echo ($topic['category_id'] == $category['category_id']) ? 'selected' : ''; ?>>
                             <?php echo htmlspecialchars($category['name']); ?>
                         </option>
-                    <?php endwhile; ?>
+                    <?php endforeach; ?>
                 </select>
             </div>
             
