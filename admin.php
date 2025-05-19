@@ -85,5 +85,33 @@ $events_stmt = $pdo->query($events_sql);
 $events = $events_stmt->fetchAll();
 ?>
 
-?>
+<h2 class="mb-4">Admin Panel</h2>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Users</h5>
+                <p class="card-text display-4"><?php echo $stats['users']; ?></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Topics</h5>
+                <p class="card-text display-4"><?php echo $stats['topics']; ?></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Replies</h5>
+                <p class="card-text display-4"><?php echo $stats['replies']; ?></p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php include("includes/footer.php"); ?>
