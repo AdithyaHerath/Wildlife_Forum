@@ -22,20 +22,31 @@ require_once 'includes/header.php';
             <!-- Slide 1: Wildfires -->
             <div class="carousel-item active">
                 <img src="images/wildfire.jpeg" class="d-block w-100" alt="Wildfire Image">
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                    <h5 class="fw-bold text-warning">Wildfires Surge Across the Globe</h5>
+                         <p class="text-light">Increasing temperatures and deforestation are fueling more intense wildfires — a call to global action.</p>
+                </div>
             </div>
 
             <!-- Slide 2: Turtle Conservation -->
             <div class="carousel-item">
                 <img src="images/turtal_release.jpg" class="d-block w-100" alt="Turtle Release Image">
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                    <h5 class="fw-bold text-warning">Sea Turtle Hatchlings Released Safely</h5>
+                         <p class="text-light">A community-led initiative helps over 2,000 Olive Ridley hatchlings reach the ocean safely.</p>
+                </div>
             </div>
 
             <!-- Slide 3: Snow Leopard -->
             <div class="carousel-item">
                 <img src="images/snow_leopards.jpg" class="d-block w-100" alt="Snow Leopard Image">
-            </div>
-
-            
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                    <h5 class="fw-bold text-warning">Snow Leopard Captured on Camera</h5>
+                         <p class="text-light">A rare sighting in the Himalayas renews hope for one of the world's most elusive big cats.</p>
+                </div>
+            </div>            
         </div>
+        
  </div>
 
 </div>
