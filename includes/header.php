@@ -17,7 +17,7 @@ $is_admin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true;
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- Navbar start --> 
+    <!-- Navbar start -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold text-secondary d-flex align-items-center" href="index.php">
@@ -30,28 +30,28 @@ $is_admin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true;
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">    
-                    <li class="nav-item"><a class="nav-link" href=>Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href=>Forums</a></li>
-                    <li class="nav-item"><a class="nav-link" href=>Research Papers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="category.php">Forums</a></li> -->
+                    <li class="nav-item"><a class="nav-link" href="research.php">Research Papers</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="wildlifeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Wildlife
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="wildlifeDropdown">
-                            <li><a class="dropdown-item" href=>Wildlife</a></li>
-                            <li><a class="dropdown-item" href=>Animals</a></li>
-                            <li><a class="dropdown-item" href=>Forests</a></li>
-                            <li><a class="dropdown-item" href=>Plants</a></li>
-                            <li><a class="dropdown-item" href=>Seas</a></li>
-                            <li><a class="dropdown-item" href=>Waterfalls</a></li>
+                            <li><a class="dropdown-item" href="wildlife.php">Wildlife</a></li>
+                            <li><a class="dropdown-item" href="animal.php">Animals</a></li>
+                            <li><a class="dropdown-item" href="forest.php">Forests</a></li>
+                            <li><a class="dropdown-item" href="plants.php">Plants</a></li>
+                            <li><a class="dropdown-item" href="seas.php">Seas</a></li>
+                            <li><a class="dropdown-item" href="waterfall.php">Waterfalls</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href=>Events & Meetups</a></li>
-                    <li class="nav-item"><a class="nav-link" href=>About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.php">Events & Meetups</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aboutUs.php">About Us</a></li>
 
                     <?php if ($is_admin): ?>
                         <li class="nav-item">
-                            <a class="nav-link text-primary" href=>Admin Panel</a>
+                            <a class="nav-link text-primary" href="admin.php">Admin Panel</a>
                         </li>
                     <?php endif; ?>
                 </ul>
@@ -62,14 +62,14 @@ $is_admin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true;
                             <span class="nav-link text-secondary">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href=>Logout</a>
+                            <a class="nav-link" href="logout.php">Logout</a>
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
-                            <a class="nav-link" href=>Login</a>
+                            <a class="nav-link" href="login.php">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href=>Register</a>
+                            <a class="nav-link" href="register.php">Register</a>
                         </li>
                     <?php endif; ?>
                 </ul>
