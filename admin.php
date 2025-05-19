@@ -45,5 +45,12 @@ if (isset($_GET['delete_event'])) {
         error_log("Error deleting event: " . $e->getMessage());
     }
 }
+
+// Get statistics
+$stats = array();
+$stats['users'] = $pdo->query("SELECT COUNT(*) as count FROM users")->fetchColumn();
+$stats['topics'] = $pdo->query("SELECT COUNT(*) as count FROM topics")->fetchColumn();
+$stats['replies'] = $pdo->query("SELECT COUNT(*) as count FROM replies")->fetchColumn();
+
 ?>
 <?php include("includes/footer.php"); ?>
