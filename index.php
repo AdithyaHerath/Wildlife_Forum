@@ -10,6 +10,9 @@ require_once 'includes/header.php';
         <p class="fs-5 text-muted">Where wildlife enthusiasts meet to share knowledge, spark discussions, and connect with nature.</p>
     </div>
 
+    <!-- Image Carousel -->
+ <div id="heroCarousel" class="carousel slide shadow-sm mb-5" data-bs-ride="carousel">
+
 </div>
 
 <?php require_once 'includes/footer.php'; ?>
