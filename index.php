@@ -70,6 +70,12 @@ $categories = $categories_stmt->fetchAll();
 
 <h2 class="mb-4">Forum Categories</h2>
 
+<?php if ($logged_in): ?>
+    <div class="mb-4">
+        <a href="create_topic.php" class="btn btn-primary">Create New Topic</a>
+    </div>
+<?php endif; ?>
+
 <?php foreach ($categories as $category): ?>
     <div class="category-box">
         <h3>
