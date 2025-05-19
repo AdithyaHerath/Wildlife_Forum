@@ -128,5 +128,5 @@ $categories = $categories_stmt->fetchAll();
     </div>
 <?php endforeach; ?>
 
-
+<!-- Footer -->
 <?php require_once 'includes/footer.php'; ?>
