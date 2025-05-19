@@ -33,5 +33,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
         }
     }
 }
+
+// Handle event deletion
+if (isset($_GET['delete_event'])) {
+    $delete_id = intval($_GET['delete_event']);
+    $stmt = $pdo->prepare("DELETE FROM events WHERE event_id = ?");
+    try {
+        $stmt->execute([$delete_id]);
+    } catch (\PDOException $e) {
+        // Log the error
+        error_log("Error deleting event: " . $e->getMessage());
+    }
+}
 ?>
 <?php include("includes/footer.php"); ?>
