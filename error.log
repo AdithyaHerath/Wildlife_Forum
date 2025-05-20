@@ -1,0 +1,1 @@
+[20-May-2025 17:55:23 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in E:\xampp\htdocs\Wildlife_Forum\login.php on line 20

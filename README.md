@@ -29,13 +29,13 @@ To set up the WildConnect Forum locally, you will need a web server with PHP and
 
 1.  **Clone the repository:**
     ```bash
-    git clone [repository_url]
+    git clone https://github.com/AdithyaHerath/Wildlife_Forum
     ```
-    (Replace `[repository_url]` with the actual URL of your repository)
+    
 
 2.  **Set up the database:**
-    *   Create a new MySQL database. You can name it `forum_db_new` or update the database name in `config.php`.
-    *   Import the database schema from the `forum_db_new.sql` file located in the project root. You can do this using a database management tool like phpMyAdmin or the MySQL command line:
+    *   Create a new MySQL database. You can name it `forum_db` or update the database name in `config.php`.
+    *   Import the database schema from the `forum_db.sql` file located in the project root. You can do this using a database management tool like phpMyAdmin or the MySQL command line:
         ```bash
         mysql -u your_username -p your_database_name < forum_db_new.sql
         ```
@@ -49,7 +49,7 @@ To set up the WildConnect Forum locally, you will need a web server with PHP and
     *   Move the project files to your web server's document root directory (e.g., `htdocs` for Apache, `www` for Nginx).
 
 5.  **Access the application:**
-    *   Open your web browser and navigate to the URL where you placed the project files (e.g., `http://localhost/wildconnect-forum`).
+    *   Open your web browser and navigate to the URL where you placed the project files (e.g., `http://localhost/Wildlife_Forum`).
 
 ## Usage
 
