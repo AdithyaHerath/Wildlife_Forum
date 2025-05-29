@@ -1,4 +1,5 @@
-<?php include("includes/header.php"); 
+<?php
+require_once 'includes/header.php';
 
 // Check if user is admin
 if (!$logged_in || !$is_admin) {
@@ -74,6 +75,11 @@ $recent_topics_sql = "
 $recent_topics_stmt = $pdo->query($recent_topics_sql);
 $recent_topics = $recent_topics_stmt->fetchAll();
 
+// Get recent users
+$recent_users_sql = "SELECT * FROM users ORDER BY created_at DESC LIMIT 5";
+$recent_users_stmt = $pdo->query($recent_users_sql);
+$recent_users = $recent_users_stmt->fetchAll();
+
 // Get all events with creator info
 $events_sql = "
     SELECT e.event_id, e.title, e.description, e.event_date, u.username 
@@ -115,10 +121,55 @@ $events = $events_stmt->fetchAll();
 </div>
 
 <div class="row">
+    <!-- Left Column -->
+    <div class="col-md-6">
+        <!-- Create Category -->
+        <div class="card mb-4">
+            <div class="card-header"><h3 class="card-title h5 mb-0">Create New Category</h3></div>
+            <div class="card-body">
+                <?php if (!empty($error)): ?><div class="alert alert-danger"><?php echo $error; ?></div><?php endif; ?>
+                <?php if (!empty($success)): ?><div class="alert alert-success"><?php echo $success; ?></div><?php endif; ?>
+                <form action="" method="post">
+                    <input type="hidden" name="action" value="create_category">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Category Name</label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" name="description" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Category</button>
+                </form>
+            </div>
+        </div>
 
-    <div class="card mb-4">
+        <!-- Recent Users -->
+        <div class="card mb-4">
+            <div class="card-header"><h3 class="card-title h5 mb-0">Recent Users</h3></div>
+            <div class="card-body">
+                <div class="list-group">
+                    <?php foreach ($recent_users as $user): ?>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-0"><?php echo htmlspecialchars($user['username']); ?></h6>
+                                <small class="text-muted">Joined <?php echo date('M j, Y', strtotime($user['created_at'])); ?></small>
+                            </div>
+                            <?php if ($user['is_admin']): ?>
+                                <span class="badge bg-primary">Admin</span>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="col-md-6">
         <!-- Categories -->
-        <div class="card-header"><h3 class="card-title h5 mb-0">Categories</h3></div>
+        <div class="card mb-4">
+            <div class="card-header"><h3 class="card-title h5 mb-0">Categories</h3></div>
             <div class="card-body">
                 <div class="list-group">
                     <?php foreach ($categories as $category): ?>
@@ -200,4 +251,5 @@ $events = $events_stmt->fetchAll();
         </div>
     </div>
 </div>
-<?php include("includes/footer.php"); ?>
+
+<?php require_once 'includes/footer.php'; ?>

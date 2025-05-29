@@ -1,1 +1,11 @@
 [20-May-2025 17:55:23 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in E:\xampp\htdocs\Wildlife_Forum\login.php on line 20
+[29-May-2025 14:52:11 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'forum_db.events' doesn't exist in /Applications/MAMP/htdocs/webmay29/Wildlife_Forum/admin.php:84
+Stack trace:
+#0 /Applications/MAMP/htdocs/webmay29/Wildlife_Forum/admin.php(84): PDO->query('\n    SELECT e.e...')
+#1 {main}
+  thrown in /Applications/MAMP/htdocs/webmay29/Wildlife_Forum/admin.php on line 84
+[29-May-2025 14:54:10 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'forum_db.events' doesn't exist in /Applications/MAMP/htdocs/webmay29/Wildlife_Forum/admin.php:90
+Stack trace:
+#0 /Applications/MAMP/htdocs/webmay29/Wildlife_Forum/admin.php(90): PDO->query('\n    SELECT e.e...')
+#1 {main}
+  thrown in /Applications/MAMP/htdocs/webmay29/Wildlife_Forum/admin.php on line 90
