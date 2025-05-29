@@ -1,7 +1,7 @@
 <?php
 require_once 'includes/header.php';
 
-// Check if user is admin
+// Check if user is admin first
 if (!$logged_in || !$is_admin) {
     header("location: index.php");
     exit();
